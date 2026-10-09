@@ -15,6 +15,11 @@ public class LeaderboardController {
 
     private final LeaderboardService leaderboardService;
 
+    @GetMapping
+    public ResponseEntity<LeaderboardResponse> getLeaderboard() {
+        return ResponseEntity.ok(leaderboardService.getGlobalLeaderboard());
+    }
+
     @GetMapping("/global")
     public ResponseEntity<LeaderboardResponse> getGlobal() {
         return ResponseEntity.ok(leaderboardService.getGlobalLeaderboard());

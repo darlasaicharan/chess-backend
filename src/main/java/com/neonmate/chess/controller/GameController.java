@@ -32,7 +32,7 @@ public class GameController {
                 : (userDetails != null ? userDetails.getUsername() : null);
 
         if (targetUser == null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.ok(List.of());
         }
 
         return ResponseEntity.ok(gameService.getGames(targetUser, page, size));

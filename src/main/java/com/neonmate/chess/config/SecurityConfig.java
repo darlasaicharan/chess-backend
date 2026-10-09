@@ -43,16 +43,17 @@ public class SecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> {
                 // Public endpoints
-                auth.requestMatchers("/auth/**").permitAll()
+                auth.requestMatchers("/", "/health", "/error").permitAll()
+                    .requestMatchers("/auth/**").permitAll()
                     .requestMatchers("/ws/**").permitAll()
                     .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/leaderboard/**").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/puzzles/**").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/tournaments/**").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/achievements/**").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/games/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/leaderboard", "/leaderboard/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/puzzles", "/puzzles/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/tournaments", "/tournaments/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/achievements", "/achievements/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/games", "/games/**").permitAll()
                     .requestMatchers(HttpMethod.PUT, "/users/me").authenticated()
-                    .requestMatchers(HttpMethod.GET, "/users/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/users", "/users/**").permitAll()
                     .requestMatchers("/ai/**").permitAll();
 
                 // H2 console — only permitted in dev (when spring.h2.console.enabled=true)
